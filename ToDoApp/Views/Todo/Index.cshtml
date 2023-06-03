@@ -1,0 +1,37 @@
+@model List<Todo>
+
+
+<h1>Todo List</h1>
+<a class="btn btn-primary" asp-controller="Todo" asp-action="Create">Add new + </a>
+<div class="container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Title</th>
+                <th scope="col">Description</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var todo in Model)
+            {
+                <tr>
+                    <th scope="row">@todo.Id</th>
+                    <td>@todo.Title</td>
+                    <td>@todo.Description</td>
+                    <td>
+                        <button type="button" class="btn btn-primary">View</button>
+                        <a class="btn btn-primary" asp-controller="Todo" asp-route-id="@todo.Id" asp-action="Edit">Edit</a>
+                        <form method="post">
+                            <input type="hidden" name="Id" value="@todo.Id" />
+                            <button type="submit" class="btn btn-danger" asp-controller="Todo" asp-action="Delete">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+</div>
+
